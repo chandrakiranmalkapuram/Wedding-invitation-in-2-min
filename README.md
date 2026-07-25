@@ -35,17 +35,17 @@ object at the top of `script.js`.
 
 ```js
 const WEDDING = {
-  brideName:    "Gayathri",
-  groomName:    "Anurag Sai",
+  brideName:    "Write bride name here",
+  groomName:    "Write groom name here",
   weddingDate:  "23rd August 2026",
   weddingDay:   "Sunday",
-  weddingTime:  "11:38 AM",
-  venueName:    "Bhaskara Gardens",
-  venueAddress: "Bhaskara Gardens A/C, Shadnagar, Telangana",
-  mapsLink:     "https://www.google.co.uk/maps/place/...",
-  phone1:       "+91 90636 56157",
-  phone2:       "+91 98667 01897",
-  whatsapp:     "+91 90636 56157",
+  weddingTime:  "11:10 AM",
+  venueName:    "Write venue name here",
+  venueAddress: "Write venue address here",
+  mapsLink:     "Paste google maps link here",
+  phone1:       "+91 90********",
+  phone2:       "+91 98********",
+  whatsapp:     "+91 90********",
   whatsappLink: "https://gayathri-anuragsai.netlify.app/",
   email:        ""   // leave blank to hide the email row on the Contact card
 };
