@@ -1,4 +1,4 @@
-#Wedding Invitation Website
+# Wedding Invitation Website
 
 A single-page, mobile-first digital wedding invitation with a South Indian
 Hindu temple theme — an ornate gopuram silhouette, gold ornamentation,
@@ -46,7 +46,7 @@ const WEDDING = {
   phone1:       "+91 90636 56157",
   phone2:       "+91 98667 01897",
   whatsapp:     "+91 90636 56157",
-  whatsappLink: "https://wa.me/919063656157",
+  whatsappLink: "https://gayathri-anuragsai.netlify.app/",
   email:        ""   // leave blank to hide the email row on the Contact card
 };
 ```
