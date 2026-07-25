@@ -1,0 +1,5 @@
+Add your background music file here, named exactly:
+
+    music.mp3
+
+See the main README.md for details on sourcing/licensing the track.

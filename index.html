@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Gayathri &amp; Anurag Sai — Wedding Invitation</title>
+<meta name="description" content="Together with our families, we joyfully invite you to celebrate our wedding." />
+
+<!-- Fonts: Cormorant Garamond (display), Cinzel (labels/eyebrows), Mulish (body) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500;1,600&family=Cinzel:wght@500;600&family=Mulish:wght@300;400;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============================= LOADER ============================= -->
+<div id="loader">
+  <div class="loader-inner">
+    <svg class="loader-mandala" width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="#E9D394" stroke-width="1">
+        <circle cx="36" cy="36" r="34"/>
+        <circle cx="36" cy="36" r="26"/>
+        <g>
+          <path d="M36 2 L38 12 L34 12 Z" fill="#E9D394" stroke="none"/>
+          <path d="M36 70 L38 60 L34 60 Z" fill="#E9D394" stroke="none"/>
+          <path d="M2 36 L12 38 L12 34 Z" fill="#E9D394" stroke="none"/>
+          <path d="M70 36 L60 38 L60 34 Z" fill="#E9D394" stroke="none"/>
+        </g>
+      </g>
+      <circle cx="36" cy="36" r="5" fill="#E9D394"/>
+    </svg>
+    <p class="loader-title">A little celebration awaits&hellip;</p>
+    <button id="tap-begin" type="button">Tap to Begin</button>
+  </div>
+</div>
+
+<!-- ============================= AMBIENT PETALS ============================= -->
+<div class="petal-field" id="petal-field" aria-hidden="true"></div>
+
+<!-- ============================= MUSIC CONTROL ============================= -->
+<button id="music-toggle" aria-label="Toggle background music" aria-pressed="false">
+  <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+</button>
+<audio id="bg-music" loop preload="auto">
+  <source src="assets/music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- ============================= HERO ============================= -->
+<section id="hero">
+  <svg class="bg-gopuram parallax" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" fill="#E9D394">
+    <use href="#gopuram-shape"/>
+  </svg>
+  <svg class="hero-pillar hero-pillar-left" viewBox="0 0 40 220" xmlns="http://www.w3.org/2000/svg"><use href="#pillar-shape"/></svg>
+  <svg class="hero-pillar hero-pillar-right" viewBox="0 0 40 220" xmlns="http://www.w3.org/2000/svg"><use href="#pillar-shape"/></svg>
+
+  <div class="hero-frame gold-frame reveal-fade in-view">
+    <p class="eyebrow hero-eyebrow">Together with our families</p>
+    <p class="hero-lead">Joyfully invite you to celebrate the wedding of</p>
+
+    <h1 class="hero-names">
+      <span class="shimmer-text" data-bind="brideName">Bride</span>
+      <span class="hero-heart">&#10084;</span>
+      <span class="shimmer-text" data-bind="groomName">Groom</span>
+    </h1>
+
+    <button id="open-invitation" type="button">Open Invitation</button>
+    <div class="scroll-cue">&#8595;</div>
+  </div>
+</section>
+
+<!-- ============================= 1. COUPLE NAMES ============================= -->
+<section id="couple" class="textured">
+  <svg class="bg-gopuram" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" fill="#6B0F1F"><use href="#gopuram-shape"/></svg>
+  <div class="section-inner">
+    <div class="mandala-divider reveal" data-i="0">
+      <span class="line"></span>
+      <svg width="22" height="22" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" stroke="#C9A24B" fill="none"/><circle cx="11" cy="11" r="3" fill="#C9A24B"/></svg>
+      <span class="line"></span>
+    </div>
+    <h2 class="names reveal" data-i="1">
+      <span class="shimmer-text" data-bind="brideName">Bride</span>
+      <span class="heart">&#10084;</span>
+      <span class="shimmer-text" data-bind="groomName">Groom</span>
+    </h2>
+    <p class="quote reveal" data-i="2">&ldquo;Two hearts, one beautiful journey.&rdquo;</p>
+  </div>
+</section>
+
+<!-- ============================= 2. CEREMONY ============================= -->
+<section id="ceremony" class="textured">
+  <div class="section-inner">
+    <p class="eyebrow reveal" data-i="0">The Ceremony</p>
+    <h2 class="reveal" data-i="1" style="margin-top:0.4rem;">Wedding Ceremony</h2>
+    <svg width="38" height="38" viewBox="0 0 46 46" fill="none" class="reveal" data-i="1" style="margin:1rem auto 0; display:block;">
+      <path d="M23 4 L30 16 H16 Z" fill="#C9A24B"/>
+      <rect x="18" y="16" width="10" height="20" fill="#C9A24B"/>
+      <rect x="10" y="36" width="26" height="4" fill="#C9A24B"/>
+    </svg>
+
+    <div class="scratch-card reveal-scale" id="scratch-card">
+      <div class="scratch-reveal">
+        <p class="eyebrow" style="color:var(--gold-light);">Save the Date</p>
+        <h3 data-bind="weddingDate">--</h3>
+        <p class="scratch-sub">Mark your calendars, we can&rsquo;t wait to see you</p>
+      </div>
+      <canvas id="scratch-canvas" aria-hidden="true"></canvas>
+      <p class="scratch-hint" id="scratch-hint">&#10024; Scratch to reveal the date &#10024;</p>
+    </div>
+
+    <div class="ceremony-card gold-frame reveal-scale" style="margin-top:1.6rem;">
+      <div class="detail-row">
+        <span class="detail-label">Day</span>
+        <span class="detail-value" data-bind="weddingDay">--</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Time</span>
+        <span class="detail-value" data-bind="weddingTime">--</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Venue</span>
+        <span class="detail-value" data-bind="venueName">--</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Address</span>
+        <span class="detail-value" data-bind="venueAddress">--</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= 3. VENUE ============================= -->
+<section id="venue">
+  <div class="section-inner">
+    <p class="eyebrow reveal" data-i="0">Where to Find Us</p>
+    <div class="venue-card glow-border reveal" data-i="1" style="margin-top:1.6rem;">
+      <svg width="46" height="46" viewBox="0 0 46 46" fill="none" style="margin:0 auto 1rem; display:block;">
+        <path d="M23 4 L30 16 H16 Z" fill="#C9A24B"/>
+        <rect x="18" y="16" width="10" height="20" fill="#C9A24B"/>
+        <rect x="10" y="36" width="26" height="4" fill="#C9A24B"/>
+      </svg>
+      <h3 data-bind="venueName">Venue Name</h3>
+      <p data-bind="venueAddress">Complete address</p>
+      <a class="maps-btn" data-bind-href="mapsLink" href="#" target="_blank" rel="noopener">View on Google Maps</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= 4. TIMELINE ============================= -->
+<section id="timeline" class="textured">
+  <div class="section-inner">
+    <p class="eyebrow reveal" data-i="0">How the Day Unfolds</p>
+    <h2 class="reveal" data-i="1" style="margin-top:0.4rem;">Wedding Timeline</h2>
+
+    <div class="timeline-list">
+      <div class="timeline-item reveal" data-i="0">
+        <span class="timeline-dot"></span>
+        <div class="timeline-text"><h4>Wedding Ceremony</h4><span data-bind="weddingTime">Muhurtham</span></div>
+      </div>
+      <div class="timeline-item reveal" data-i="1">
+        <span class="timeline-dot"></span>
+        <div class="timeline-text"><h4>Lunch</h4><span>Traditional feast follows</span></div>
+      </div>
+      <div class="timeline-item reveal" data-i="2">
+        <span class="timeline-dot"></span>
+        <div class="timeline-text"><h4>Blessings</h4><span>Elders bless the couple</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= 5. BLESSINGS ============================= -->
+<section id="blessings">
+  <svg class="bg-gopuram" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" fill="#E9D394" style="opacity:0.08;"><use href="#gopuram-shape"/></svg>
+  <div class="section-inner">
+    <div class="diya-pair reveal-scale">
+      <svg width="34" height="34" viewBox="0 0 40 40"><use href="#diya-shape"/></svg>
+      <svg width="34" height="34" viewBox="0 0 40 40"><use href="#diya-shape"/></svg>
+    </div>
+    <p class="quote reveal-fade">&ldquo;Our greatest blessing is having you celebrate this special day with us.&rdquo;</p>
+  </div>
+</section>
+
+<!-- ============================= 6. CONTACT DETAILS ============================= -->
+<section id="rsvp" class="textured">
+  <div class="section-inner">
+    <p class="eyebrow reveal" data-i="0">Reach Us</p>
+    <h2 class="reveal" data-i="1" style="margin-top:0.4rem;">Contact Details</h2>
+    <svg width="38" height="38" viewBox="0 0 46 46" fill="none" class="reveal" data-i="1" style="margin:1rem auto 0; display:block;">
+      <path d="M23 4 L30 16 H16 Z" fill="#C9A24B"/>
+      <rect x="18" y="16" width="10" height="20" fill="#C9A24B"/>
+      <rect x="10" y="36" width="26" height="4" fill="#C9A24B"/>
+    </svg>
+
+    <div class="rsvp-card gold-frame reveal-scale" style="margin-top:1.6rem;">
+      <div class="rsvp-item">
+        <span class="detail-label">Phone</span>
+        <a data-bind-tel="phone1" href="#" data-bind="phone1">--</a>
+        <a data-bind-tel="phone2" href="#" data-bind="phone2" style="font-size:1rem; opacity:0.75;">--</a>
+      </div>
+      <div class="rsvp-item">
+        <span class="detail-label">Email</span>
+        <a data-bind-mail="email" href="#" data-bind="email">--</a>
+      </div>
+      <div class="rsvp-item">
+        <span class="detail-label">WhatsApp</span>
+        <a data-bind-wa="whatsapp" href="#" data-bind="whatsapp">--</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= FINAL / THANK YOU ============================= -->
+<section id="thankyou">
+  <div class="section-inner">
+    <svg width="30" height="30" viewBox="0 0 30 30" style="margin-bottom:1.2rem;"><circle cx="15" cy="15" r="13" fill="none" stroke="#C9A24B"/><circle cx="15" cy="15" r="4" fill="#C9A24B"/></svg>
+    <h2 class="reveal-fade">Thank You</h2>
+    <p class="reveal-fade">No gifts are required&mdash;your presence is the greatest gift and the most important blessing to us.</p>
+    <p class="reveal-fade">We look forward to celebrating this joyous occasion with you.</p>
+    <p class="names reveal-fade">
+      <span data-bind="brideName">Bride</span> &#10084; <span data-bind="groomName">Groom</span>
+    </p>
+    <p class="with-love reveal-fade">With Love</p>
+  </div>
+</section>
+
+<!-- ============================= FOOTER ============================= -->
+<footer>
+  <div class="footer-icons">
+    <svg width="18" height="25" viewBox="0 0 30 42" style="color:#C9A24B; opacity:0.7;"><use href="#bell-shape"/></svg>
+    <svg width="60" height="45" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" fill="#C9A24B" style="opacity:0.5;"><use href="#gopuram-shape"/></svg>
+    <svg width="18" height="25" viewBox="0 0 30 42" style="color:#C9A24B; opacity:0.7;"><use href="#bell-shape"/></svg>
+  </div>
+  <div class="mandala-divider"><span class="line"></span><svg width="16" height="16" viewBox="0 0 22 22"><circle cx="11" cy="11" r="9" stroke="#8E6B22" fill="none"/></svg><span class="line"></span></div>
+  <p><span data-bind="brideName">Bride</span> &amp; <span data-bind="groomName">Groom</span> &middot; <span data-bind="weddingDate">Date</span></p>
+  <p style="opacity:0.6; margin-top:0.4rem;">Made with love, for our loved ones.</p>
+</footer>
+
+<!-- Hidden reusable SVG symbols: ornate temple tower, oil lamp, bell, pillar -->
+<svg style="position:absolute; width:0; height:0; overflow:hidden;" aria-hidden="true">
+
+  <!-- Ornate stepped gopuram (South Indian temple gateway tower) silhouette -->
+  <symbol id="gopuram-shape" viewBox="0 0 400 300">
+    <!-- finial: stacked kalasha pots + flag -->
+    <path d="M200 2 L212 6 L200 10 Z"/>
+    <rect x="198" y="2" width="4" height="22"/>
+    <ellipse cx="200" cy="12" rx="6" ry="5"/>
+    <rect x="196" y="14" width="8" height="10"/>
+    <ellipse cx="200" cy="24" rx="9" ry="7"/>
+
+    <!-- seven tapering tiers -->
+    <path d="M184 30 L216 30 L226 42 L174 42 Z"/>
+    <path d="M174 42 L226 42 L234 64 L166 64 Z"/>
+    <path d="M166 64 L234 64 L244 86 L156 86 Z"/>
+    <path d="M156 86 L244 86 L256 108 L144 108 Z"/>
+    <path d="M144 108 L256 108 L270 132 L130 132 Z"/>
+    <path d="M130 132 L270 132 L286 158 L114 158 Z"/>
+    <path d="M114 158 L286 158 L304 186 L96 186 Z"/>
+
+    <!-- antefix rows: small kalasha merlons decorating select tiers -->
+    <path d="M188 64 L195 57 L202 64 Z"/><path d="M203 64 L210 57 L217 64 Z"/><path d="M173 64 L180 57 L187 64 Z"/><path d="M218 64 L225 57 L232 64 Z"/>
+    <path d="M149 108 L155 100 L161 108 Z"/><path d="M169 108 L175 100 L181 108 Z"/><path d="M189 108 L195 100 L201 108 Z"/><path d="M209 108 L215 100 L221 108 Z"/><path d="M229 108 L235 100 L241 108 Z"/>
+    <path d="M123 158 L130 150 L137 158 Z"/><path d="M153 158 L160 150 L167 158 Z"/><path d="M183 158 L190 150 L197 158 Z"/><path d="M213 158 L220 150 L227 158 Z"/><path d="M243 158 L250 150 L257 158 Z"/>
+
+    <!-- vimana / sanctum base -->
+    <rect x="96" y="186" width="208" height="94"/>
+
+    <!-- doorway lintel + pillars with capitals -->
+    <rect x="140" y="196" width="120" height="8"/>
+    <rect x="143" y="204" width="40" height="10"/>
+    <rect x="217" y="204" width="40" height="10"/>
+    <rect x="150" y="214" width="26" height="66"/>
+    <rect x="224" y="214" width="26" height="66"/>
+
+    <!-- two-step plinth -->
+    <path d="M80 280 L320 280 L320 286 L80 286 Z"/>
+    <path d="M60 286 L340 286 L340 293 L60 293 Z"/>
+  </symbol>
+
+  <!-- Diya: traditional oil lamp with a softly flickering flame -->
+  <symbol id="diya-shape" viewBox="0 0 40 40">
+    <path d="M6 24 C6 32 14 33 20 33 C26 33 34 32 34 24 L28 20 H12 Z" fill="#C9A24B"/>
+    <rect x="17" y="33" width="6" height="4" fill="#8E6B22"/>
+    <g class="diya-flame">
+      <path d="M20 6 C14 13 14 20 20 23 C26 20 26 13 20 6 Z" fill="#F2B84B"/>
+      <path d="M20 12 C17 16 17 19 20 21 C23 19 23 16 20 12 Z" fill="#FBEBC4"/>
+    </g>
+  </symbol>
+
+  <!-- Temple bell (ghanta) -->
+  <symbol id="bell-shape" viewBox="0 0 30 42">
+    <circle cx="15" cy="4" r="2.2" fill="none" stroke="currentColor" stroke-width="1.4"/>
+    <path d="M15 6 V10" stroke="currentColor" stroke-width="1.4" fill="none"/>
+    <path d="M6 12 C6 4 24 4 24 12 L27.5 27 C27.5 31 2.5 31 2.5 27 Z" fill="currentColor"/>
+    <rect x="2" y="27" width="26" height="3" rx="1.4" fill="currentColor"/>
+    <path d="M15 30 V37" stroke="currentColor" stroke-width="1.4" fill="none"/>
+    <circle cx="15" cy="38.5" r="2" fill="currentColor"/>
+  </symbol>
+
+  <!-- Temple pillar, used flanking the hero mandapa -->
+  <symbol id="pillar-shape" viewBox="0 0 40 220">
+    <ellipse cx="20" cy="4" rx="7" ry="4" fill="currentColor"/>
+    <rect x="0" y="6" width="40" height="7" fill="currentColor"/>
+    <path d="M3 13 L37 13 L33 30 L7 30 Z" fill="currentColor"/>
+    <rect x="11" y="30" width="18" height="160" fill="currentColor"/>
+    <rect x="7" y="190" width="26" height="10" fill="currentColor"/>
+    <rect x="0" y="200" width="40" height="16" fill="currentColor"/>
+  </symbol>
+</svg>
+
+<script src="script.js"></script>
+</body>
+</html>

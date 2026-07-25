@@ -1,0 +1,683 @@
+/* ==========================================================================
+   GAYATHRI & ANURAG SAI — WEDDING INVITATION
+   Design language: South Indian temple gopuram, gold repoussé, kumkum maroon
+   ========================================================================== */
+
+:root {
+  /* --- Palette --------------------------------------------------------- */
+  --cream:        #FBF5E9;
+  --ivory:        #F4E9D4;
+  --ivory-deep:   #ECDCBB;
+  --maroon-deep:  #4A0A15;
+  --maroon:       #6B0F1F;
+  --maroon-light: #8E1B2E;
+  --gold:         #C9A24B;
+  --gold-light:   #E9D394;
+  --gold-dark:    #8E6B22;
+  --ink:          #3B2415;
+  --ink-soft:     #6B5137;
+
+  /* --- Type -------------------------------------------------------------*/
+  --font-display: 'Cormorant Garamond', serif;
+  --font-label:   'Cinzel', serif;
+  --font-body:    'Mulish', sans-serif;
+
+  /* --- Rhythm ------------------------------------------------------------*/
+  --section-pad: clamp(4rem, 9vw, 7rem);
+  --edge-pad: clamp(1.25rem, 6vw, 3rem);
+  --radius: 6px;
+  --ease: cubic-bezier(.22,.61,.22,1);
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: 300;
+  background: var(--cream);
+  color: var(--ink);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  color: var(--maroon-deep);
+  margin: 0;
+  font-weight: 600;
+}
+
+.eyebrow {
+  font-family: var(--font-label);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  color: var(--gold-dark);
+}
+
+a { color: inherit; }
+
+button { font-family: var(--font-body); cursor: pointer; }
+
+/* ==========================================================================
+   PETALS (ambient floating florals — pure CSS, no image assets needed)
+   ========================================================================== */
+
+.petal-field {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 40;
+  overflow: hidden;
+}
+
+.petal {
+  position: absolute;
+  top: -5vh;
+  width: 14px;
+  height: 10px;
+  background: linear-gradient(135deg, var(--maroon-light), var(--gold-light));
+  border-radius: 100% 0 100% 0;
+  opacity: 0.75;
+  animation: petal-fall linear forwards;
+  will-change: transform;
+}
+
+.petal.spark {
+  border-radius: 50%;
+  background: var(--gold-light);
+  box-shadow: 0 0 6px 2px rgba(233,211,148,0.7);
+}
+
+@keyframes petal-fall {
+  0%   { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+  8%   { opacity: 0.8; }
+  100% { transform: translateY(108vh) translateX(var(--drift, 40px)) rotate(400deg); opacity: 0; }
+}
+
+/* ==========================================================================
+   GOLD ORNAMENT UTILITIES
+   ========================================================================== */
+
+.gold-frame {
+  position: relative;
+  border: 1px solid var(--gold);
+  outline: 1px solid var(--gold);
+  outline-offset: 6px;
+}
+.gold-frame::before,
+.gold-frame::after {
+  content: "";
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M2 38 C2 20 20 2 38 2' fill='none' stroke='%23C9A24B' stroke-width='1.4'/%3E%3Ccircle cx='7' cy='33' r='2.2' fill='%23C9A24B'/%3E%3Cpath d='M11 29 C15 25 15 19 11 15' fill='none' stroke='%23C9A24B' stroke-width='1'/%3E%3C/svg%3E") no-repeat center / contain;
+  opacity: 0.85;
+  pointer-events: none;
+  z-index: 3;
+}
+.gold-frame::before { top: -15px; left: -15px; }
+.gold-frame::after  { bottom: -15px; right: -15px; transform: rotate(180deg); }
+
+/* Shimmering gold text — used on the couple's names for a premium, "catching the
+   light" feel reminiscent of gold-thread embroidery on an invitation card. */
+.shimmer-text {
+  background: linear-gradient(100deg, var(--gold) 20%, var(--gold-light) 38%, #FBF0CE 50%, var(--gold-light) 62%, var(--gold) 80%);
+  background-size: 240% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 7s linear infinite;
+}
+@keyframes shimmer { to { background-position: -240% center; } }
+
+/* Faint kolam-style dotted texture for a richer, more tactile "printed card" feel */
+.textured::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, rgba(201,162,75,0.18) 1px, transparent 1.4px);
+  background-size: 26px 26px;
+  opacity: 0.35;
+}
+.textured::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(201,162,75,0.10), transparent 55%),
+    radial-gradient(circle at 88% 82%, rgba(107,15,31,0.06), transparent 55%);
+}
+
+.mandala-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  margin: 1.6rem auto;
+  width: min(320px, 70%);
+}
+.mandala-divider .line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.mandala-divider svg { flex-shrink: 0; }
+
+.glow-border {
+  box-shadow: 0 0 0 1px var(--gold), 0 0 18px rgba(201,162,75,0.0);
+  animation: glow-pulse 4.5s ease-in-out infinite;
+}
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 0 1px var(--gold), 0 0 10px rgba(201,162,75,0.15); }
+  50%      { box-shadow: 0 0 0 1px var(--gold-light), 0 0 26px rgba(201,162,75,0.45); }
+}
+
+/* ==========================================================================
+   REVEAL ANIMATIONS (scroll-triggered via IntersectionObserver)
+   ========================================================================== */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 1s var(--ease), transform 1s var(--ease);
+}
+.reveal.in-view { opacity: 1; transform: translateY(0); }
+
+.reveal-fade { opacity: 0; transition: opacity 1.4s var(--ease); }
+.reveal-fade.in-view { opacity: 1; }
+
+.reveal-scale { opacity: 0; transform: scale(0.92); transition: opacity 1.2s var(--ease), transform 1.2s var(--ease); }
+.reveal-scale.in-view { opacity: 1; transform: scale(1); }
+
+.stagger > * { transition-delay: calc(var(--i, 0) * 120ms); }
+
+/* ==========================================================================
+   LOADER / TAP TO BEGIN
+   ========================================================================== */
+
+#loader {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: radial-gradient(ellipse at 50% 30%, var(--maroon) 0%, var(--maroon-deep) 75%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 1s var(--ease), visibility 1s var(--ease);
+}
+#loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+
+.loader-inner { text-align: center; color: var(--ivory); }
+
+.loader-mandala {
+  animation: spin-slow 30s linear infinite;
+  margin: 0 auto 1.5rem;
+}
+@keyframes spin-slow { to { transform: rotate(360deg); } }
+
+#tap-begin {
+  margin-top: 1.8rem;
+  padding: 0.85rem 2.4rem;
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold-light);
+  font-family: var(--font-label);
+  letter-spacing: 0.2em;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  border-radius: 999px;
+  transition: background .4s, color .4s;
+}
+#tap-begin:hover, #tap-begin:focus-visible { background: var(--gold); color: var(--maroon-deep); }
+
+.loader-title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.05rem;
+  letter-spacing: 0.05em;
+  color: var(--gold-light);
+}
+
+/* ==========================================================================
+   MUSIC CONTROL
+   ========================================================================== */
+
+#music-toggle {
+  position: fixed;
+  top: 1.1rem;
+  right: 1.1rem;
+  z-index: 90;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid var(--gold);
+  background: rgba(251,245,233,0.85);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--maroon-deep);
+  transition: transform .3s;
+}
+#music-toggle:hover { transform: scale(1.08); }
+#music-toggle .bar { width: 3px; height: 8px; background: var(--maroon-deep); margin: 0 1.5px; border-radius: 2px; display: inline-block; }
+#music-toggle.playing .bar { animation: bar-bounce 0.9s ease-in-out infinite; }
+#music-toggle .bar:nth-child(2) { animation-delay: .15s; }
+#music-toggle .bar:nth-child(3) { animation-delay: .3s; }
+@keyframes bar-bounce { 0%,100% { height: 6px; } 50% { height: 16px; } }
+
+/* ==========================================================================
+   SECTION SCAFFOLD
+   ========================================================================== */
+
+section {
+  position: relative;
+  padding: var(--section-pad) var(--edge-pad);
+  overflow: hidden;
+}
+
+.section-inner {
+  max-width: 640px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.bg-gopuram {
+  position: absolute;
+  bottom: -2%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(720px, 160%);
+  opacity: 0.06;
+  z-index: 0;
+  pointer-events: none;
+}
+.bg-gopuram.parallax { transition: transform .1s linear; }
+
+/* ---- Hero ---------------------------------------------------------------*/
+
+#hero {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, var(--maroon-deep) 0%, var(--maroon) 55%, var(--maroon-deep) 100%);
+  color: var(--ivory);
+  text-align: center;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+#hero .bg-gopuram { opacity: 0.10; filter: brightness(3); }
+
+.hero-frame {
+  position: relative;
+  padding: 2.6rem 1.8rem;
+  max-width: 460px;
+}
+
+.hero-eyebrow {
+  color: var(--gold-light);
+  margin-bottom: 0.4rem;
+}
+.hero-lead {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.1rem, 4vw, 1.4rem);
+  color: var(--ivory);
+  margin: 0.6rem 0 1.4rem;
+  line-height: 1.5;
+}
+
+.hero-names {
+  font-size: clamp(2.6rem, 11vw, 4rem);
+  line-height: 1.15;
+  color: var(--gold-light);
+}
+.hero-heart {
+  display: block;
+  font-size: 1.1rem;
+  color: var(--gold);
+  margin: 0.35rem 0;
+}
+
+#open-invitation {
+  margin-top: 2.2rem;
+  padding: 0.9rem 2.6rem;
+  background: var(--gold);
+  color: var(--maroon-deep);
+  border: none;
+  border-radius: 999px;
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.35);
+  transition: transform .35s var(--ease), box-shadow .35s;
+}
+#open-invitation:hover, #open-invitation:focus-visible {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+.scroll-cue {
+  margin-top: 2.6rem;
+  font-size: 1.4rem;
+  color: var(--gold);
+  animation: bob 2.4s ease-in-out infinite;
+}
+@keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
+
+/* Flanking mandapa pillars either side of the hero card */
+.hero-pillar {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 78%;
+  width: auto;
+  color: var(--gold);
+  opacity: 0.16;
+  z-index: 1;
+  pointer-events: none;
+}
+.hero-pillar-left { left: 2%; }
+.hero-pillar-right { right: 2%; }
+@media (max-width: 480px) {
+  .hero-pillar { opacity: 0.10; left: -2%; }
+  .hero-pillar-right { right: -2%; }
+}
+
+/* ---- Couple names section ------------------------------------------------*/
+
+#couple {
+  background: var(--cream);
+  text-align: center;
+}
+#couple .names {
+  font-size: clamp(2.2rem, 8vw, 3.4rem);
+  color: var(--maroon-deep);
+}
+#couple .heart { color: var(--maroon-light); font-size: 1.3rem; margin: 0.3rem 0; display:block; }
+.quote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--ink-soft);
+  margin-top: 1.2rem;
+}
+
+/* ---- Ceremony card --------------------------------------------------------*/
+
+#ceremony {
+  background: var(--ivory);
+}
+.ceremony-card {
+  background: var(--cream);
+  padding: 2.6rem 1.8rem;
+  border-radius: var(--radius);
+  position: relative;
+}
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0.85rem 0;
+  border-bottom: 1px dashed rgba(139,91,34,0.35);
+  text-align: left;
+}
+.detail-row:last-child { border-bottom: none; }
+.detail-label {
+  font-family: var(--font-label);
+  font-size: 0.65rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+}
+.detail-value {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--maroon-deep);
+  text-align: right;
+}
+
+/* ---- Scratch-to-reveal Save the Date ---------------------------------------*/
+
+.scratch-card {
+  position: relative;
+  max-width: 340px;
+  margin: 0 auto;
+  border-radius: 10px;
+  overflow: hidden;
+  background: linear-gradient(160deg, var(--maroon) 0%, var(--maroon-deep) 100%);
+  box-shadow: 0 10px 30px rgba(74,10,21,0.28);
+}
+.scratch-card::before,
+.scratch-card::after { display: none; } /* corner flourish sits oddly mid-scroll here — keep this card clean */
+
+.scratch-reveal {
+  padding: 2.6rem 1.6rem;
+  text-align: center;
+}
+.scratch-reveal h3 {
+  color: var(--gold-light);
+  font-size: clamp(1.7rem, 7vw, 2.1rem);
+  margin-top: 0.3rem;
+}
+.scratch-sub {
+  color: var(--ivory-deep);
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  letter-spacing: 0.02em;
+}
+
+#scratch-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  touch-action: none;
+  transition: opacity 0.6s var(--ease);
+}
+#scratch-canvas.revealed {
+  opacity: 0;
+  pointer-events: none;
+}
+#scratch-canvas:active { cursor: grabbing; }
+
+.scratch-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 14px;
+  transform: translateX(-50%);
+  margin: 0;
+  font-family: var(--font-label);
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  opacity: 0.85;
+  animation: hint-pulse 2.2s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+@keyframes hint-pulse { 0%,100% { opacity: 0.5; } 50% { opacity: 0.95; } }
+.scratch-card.fully-revealed .scratch-hint { display: none; }
+
+/* ---- Venue -----------------------------------------------------------------*/
+
+#venue { background: var(--cream); }
+.venue-card {
+  background: var(--maroon-deep);
+  color: var(--ivory);
+  padding: 3rem 1.8rem;
+  border-radius: var(--radius);
+  position: relative;
+}
+.venue-card h3 { color: var(--gold-light); font-size: 1.9rem; }
+.venue-card p { color: var(--ivory-deep); line-height: 1.7; margin-top: 0.8rem; }
+.maps-btn {
+  display: inline-block;
+  margin-top: 1.8rem;
+  padding: 0.8rem 2rem;
+  border: 1px solid var(--gold);
+  border-radius: 999px;
+  color: var(--gold-light);
+  text-decoration: none;
+  font-family: var(--font-label);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition: background .35s, color .35s;
+}
+.maps-btn:hover { background: var(--gold); color: var(--maroon-deep); }
+
+/* ---- Timeline ---------------------------------------------------------------*/
+
+#timeline { background: var(--ivory); }
+.timeline-list { text-align: left; max-width: 380px; margin: 2.2rem auto 0; }
+.timeline-item {
+  display: flex;
+  gap: 1.1rem;
+  align-items: flex-start;
+  position: relative;
+  padding-bottom: 2.4rem;
+}
+.timeline-item:last-child { padding-bottom: 0; }
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 26px;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(var(--gold), transparent);
+}
+.timeline-item:last-child::before { display: none; }
+.timeline-dot {
+  flex-shrink: 0;
+  width: 21px;
+  height: 21px;
+  border-radius: 50%;
+  border: 1px solid var(--gold);
+  background: var(--cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.timeline-dot::after { content: ""; width: 7px; height: 7px; background: var(--gold); border-radius: 50%; }
+.timeline-text h4 { font-size: 1.3rem; color: var(--maroon-deep); }
+.timeline-text span { font-family: var(--font-body); font-size: 0.82rem; color: var(--ink-soft); }
+
+/* ---- Blessings ---------------------------------------------------------------*/
+
+#blessings {
+  background: var(--maroon-deep);
+  color: var(--ivory);
+  text-align: center;
+}
+#blessings .quote { color: var(--gold-light); font-size: 1.5rem; max-width: 480px; margin: 1rem auto 0; }
+
+.diya-pair {
+  display: flex;
+  justify-content: center;
+  gap: 2.8rem;
+}
+.diya-flame {
+  transform-origin: 50% 100%;
+  animation: flame-flicker 2.2s ease-in-out infinite;
+}
+.diya-pair svg:last-child .diya-flame { animation-delay: 0.6s; }
+@keyframes flame-flicker {
+  0%, 100% { transform: scale(1, 1) rotate(0deg); opacity: 1; }
+  25%      { transform: scale(0.94, 1.05) rotate(-2deg); opacity: 0.92; }
+  50%      { transform: scale(1.05, 0.96) rotate(1.5deg); opacity: 1; }
+  75%      { transform: scale(0.97, 1.02) rotate(-1deg); opacity: 0.95; }
+}
+
+/* ---- RSVP ---------------------------------------------------------------*/
+
+#rsvp { background: var(--cream); }
+.rsvp-card {
+  background: var(--ivory);
+  border-radius: var(--radius);
+  padding: 2.6rem 1.8rem;
+}
+.rsvp-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 1rem 0;
+  border-bottom: 1px dashed rgba(139,91,34,0.3);
+}
+.rsvp-item:last-child { border-bottom: none; }
+.rsvp-item a {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--maroon-deep);
+  text-decoration: none;
+}
+.rsvp-item a:hover { color: var(--maroon-light); }
+
+/* ---- Final / Thank you ---------------------------------------------------------------*/
+
+#thankyou {
+  background: linear-gradient(180deg, var(--maroon) 0%, var(--maroon-deep) 100%);
+  color: var(--ivory);
+  text-align: center;
+  min-height: 90svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#thankyou h2 { color: var(--gold-light); font-size: clamp(2.6rem, 9vw, 3.6rem); }
+#thankyou p { color: var(--ivory-deep); max-width: 440px; margin: 1.1rem auto; line-height: 1.75; }
+#thankyou .names { font-size: 1.9rem; color: var(--gold-light); margin-top: 1.6rem; }
+#thankyou .with-love { font-family: var(--font-display); font-style: italic; margin-top: 0.6rem; color: var(--gold); }
+
+/* ---- Footer ---------------------------------------------------------------*/
+
+footer {
+  background: var(--maroon-deep);
+  color: var(--ivory-deep);
+  text-align: center;
+  padding: 2.5rem var(--edge-pad) 2.2rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+}
+.footer-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+}
+footer .mandala-divider .line { background: linear-gradient(90deg, transparent, var(--gold-dark), transparent); }
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (min-width: 720px) {
+  .detail-value { font-size: 1.3rem; }
+}
