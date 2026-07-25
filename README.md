@@ -1,4 +1,4 @@
-# Gayathri & Anurag Sai — Wedding Invitation Website
+#Wedding Invitation Website
 
 A single-page, mobile-first digital wedding invitation with a South Indian
 Hindu temple theme — an ornate gopuram silhouette, gold ornamentation,
