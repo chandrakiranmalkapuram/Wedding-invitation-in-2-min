@@ -47,7 +47,7 @@ const WEDDING = {
   phone2:       "+91 98********",
   whatsapp:     "+91 90********",
   whatsappLink: "https://gayathri-anuragsai.netlify.app/",
-  email:        ""   // leave blank to hide the email row on the Contact card
+  email:        ""   // Write your email if you want
 };
 ```
 
