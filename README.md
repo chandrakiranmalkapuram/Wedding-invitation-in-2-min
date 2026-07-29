@@ -62,7 +62,7 @@ text directly.
 
 ---
 
-## 3. Add the background music
+## 3. Add the background music 
 
 The invitation was written with **"Chanakya" by Rishab Rikhiram Sharma** in
 mind. For copyright reasons this project ships without the actual audio file
